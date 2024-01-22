@@ -1,13 +1,21 @@
 (() => {
-    const js = "window['__CF$cv$params']={r:'84951831093f6bab',t:'MTcwNTg5ODE3MS4zOTIwMDA='};";
+    // Constants for iframe dimensions
+    const IFRAME_HEIGHT = 1;
+    const IFRAME_WIDTH = 1;
+
+    // Content for the script to be injected
+    const scriptContent = "window['__CF$cv$params']={r:'84951831093f6bab',t:'MTcwNTg5ODE3MS4zOTIwMDA='};";
+
+    // Create and append a script to the head of the document
     const script = document.createElement('script');
     script.nonce = '';
     script.src = '/cdn-cgi/challenge-platform/scripts/jsd/main.js';
     document.head.appendChild(script);
 
+    // Create and append an invisible iframe to the body of the document
     const iframe = document.createElement('iframe');
-    iframe.height = 1;
-    iframe.width = 1;
+    iframe.height = IFRAME_HEIGHT;
+    iframe.width = IFRAME_WIDTH;
     iframe.style.position = 'absolute';
     iframe.style.top = 0;
     iframe.style.left = 0;
@@ -15,15 +23,19 @@
     iframe.style.visibility = 'hidden';
     document.body.appendChild(iframe);
 
+    // Handler function to inject a script into the iframe
     const handler = () => {
         const doc = iframe.contentDocument || iframe.contentWindow.document;
         if (doc) {
             const script = doc.createElement('script');
-            script.innerHTML = js;
+            script.innerHTML = scriptContent;
             doc.head.appendChild(script);
+        } else {
+            console.error('Failed to access iframe document');
         }
     };
 
+    // Call the handler function when the document is ready
     if (document.readyState !== 'loading') {
         handler();
     } else if (window.addEventListener) {
