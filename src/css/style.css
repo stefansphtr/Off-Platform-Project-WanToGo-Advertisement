@@ -25,6 +25,29 @@ p {
     font-size: 21px;
 }
 
+.image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+}
+
 .footer {
     text-align: right;
-} 
+}
+
+@media screen and (min-width: 600px) {
+    .responsive-image {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .responsive-image {
+        width: 50%;
+    }
+}
